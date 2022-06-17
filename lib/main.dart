@@ -97,15 +97,17 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+        body: Center(
+            child: Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage('Assets/water.png'), fit: BoxFit.cover),
+      ),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           // ignore: avoid_unnecessary_containers
           Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("Assets/water.png"), fit: BoxFit.fill),
-            ),
             child: Stack(
               children: <Widget>[
                 Container(
@@ -232,6 +234,6 @@ class _LoginPageState extends State<LoginPage> {
           )
         ],
       ),
-    );
+    )));
   }
 }
