@@ -4,13 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'drawer/Powerconsumption.dart';
-import 'drawer/WaterQuality.dart';
 import 'drawer/AddApartments.dart';
-
-import 'drawer/backupRestore.dart';
 import 'drawer/Apartments.dart';
+import 'drawer/Powerconsumption.dart';
 import 'drawer/WaterLevel.dart';
+import 'drawer/WaterQuality.dart';
+import 'drawer/backupRestore.dart';
 import 'firebase_options.dart';
 import 'home.dart';
 import 'home.dart';
@@ -97,22 +96,30 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+        body: Center(
+            child: Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage('Assets/water.png'), fit: BoxFit.cover),
+      ),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          const SizedBox(
+            height: 350, //gap
+          ),
           // ignore: avoid_unnecessary_containers
           Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("Assets/water.png"), fit: BoxFit.fill),
-            ),
             child: Stack(
               children: <Widget>[
                 Container(
                   padding: const EdgeInsets.only(top: 120, left: 20, right: 30),
                   child: const Text(
-                    "",
-                    style: TextStyle(fontSize: 20, fontStyle: FontStyle.italic),
+                    "WELCOME!",
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.white),
                   ),
                 )
               ],
@@ -124,11 +131,13 @@ class _LoginPageState extends State<LoginPage> {
               children: <Widget>[
                 (TextField(
                   controller: _emailController,
-                  decoration: const InputDecoration(
-                    fillColor: Color.fromARGB(255, 6, 224, 253),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25)),
+                    fillColor: Colors.white,
                     filled: true,
                     labelText: "EMAIL",
-                    hintText: 'ENTER YOUR EMAIL ID as ABC@XYZ.COM',
+                    hintText: 'ENTER YOUR EMAIL AS ABC@XYZ.COM',
                     labelStyle: TextStyle(
                         fontFamily: 'Montserrat', color: Colors.black),
                   ),
@@ -138,11 +147,13 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 TextField(
                   controller: _passwordController,
-                  decoration: const InputDecoration(
-                    fillColor: Color.fromARGB(255, 6, 224, 253),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25)),
+                    fillColor: Colors.white,
                     filled: true,
                     labelText: "PASSWORD",
-                    hintText: "ENTER YOUr PASSWORD",
+                    hintText: "ENTER YOUR PASSWORD",
                     labelStyle: TextStyle(
                         fontFamily: 'Montserrat', color: Colors.black),
                   ),
@@ -151,20 +162,23 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 5,
                 ),
-                Container(
-                  alignment: const Alignment(1, 0),
-                  padding: const EdgeInsets.only(top: 15, left: 20),
-                  child: const InkWell(
-                    child: Text(
-                      "Forgot Password",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Montserrat",
-                          decoration: TextDecoration.underline),
-                    ),
-                  ),
-                ),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).pushNamed('/signup');
+                        },
+                        child: Text(
+                          "FORGOT YOUR PASSWORD? CLICK HERE",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Montserrat",
+                              decoration: TextDecoration.underline),
+                        ),
+                      ),
+                    ]),
                 Container(
                     alignment: Alignment.center,
                     padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -184,7 +198,6 @@ class _LoginPageState extends State<LoginPage> {
                   height: 40,
                   child: Material(
                     borderRadius: BorderRadius.circular(20),
-                    shadowColor: Colors.blue,
                     color: Colors.blue,
                     elevation: 7,
                     child: MaterialButton(
@@ -219,7 +232,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: const Text(
                         'REGISTER',
                         style: TextStyle(
-                            color: Colors.blue,
+                            color: Colors.white,
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
                             decoration: TextDecoration.underline),
@@ -232,6 +245,39 @@ class _LoginPageState extends State<LoginPage> {
           )
         ],
       ),
-    );
+    )));
   }
+}
+
+Widget build(BuildContext context) {
+  Size size = MediaQuery.of(context).size;
+  return Container(
+    margin: EdgeInsets.symmetric(vertical: size.height * 0.02),
+    width: size.width * 0.8,
+    child: Row(
+      children: <Widget>[
+        buildDivider(),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Text(
+            "OR",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        buildDivider(),
+      ],
+    ),
+  );
+}
+
+Expanded buildDivider() {
+  return const Expanded(
+    child: Divider(
+      color: Color(0xFFD9D9D9),
+      height: 1.5,
+    ),
+  );
 }
